@@ -1,8 +1,11 @@
 import autoprefixer from 'autoprefixer';
 import cssmin from 'cssnano';
 import del from 'del';
+import fs from 'fs';
 import gulp from 'gulp';
+import htmlmin from 'gulp-minify-html';
 import postcss from 'gulp-postcss';
+import replace from 'gulp-replace';
 import sass from 'gulp-sass';
 import seq from 'gulp-sequence';
 import svgmin from 'gulp-svgmin';
@@ -27,7 +30,9 @@ const paths = {
   }
 };
 
-gulp.task('build', ['svg', 'sass', 'js']);
+gulp.task('build', (done) => {
+  seq(['svg', 'sass', 'js'], 'insert:svg', 'copy:html', done);
+});
 
 gulp.task('serve', (done) => {
   seq('clean', 'build', 'browserSync', done);
@@ -63,4 +68,19 @@ gulp.task('js', () => {
 
   return gulp.src(config.src)
     .pipe(gulp.dest(config.dest));
+});
+
+gulp.task('insert:svg', () => {
+  let config = paths.vectors;
+  let svgContent = fs.readFileSync(config.dest + '/map.svg', "utf8");
+
+  return gulp.src(dirs.src + '/index.html')
+    .pipe(replace(/{{MAP_SVG}}/g, svgContent))
+    .pipe(gulp.dest(dirs.src));
+});
+
+gulp.task('copy:html', () => {
+  return gulp.src(dirs.src + '/index.html')
+    .pipe(htmlmin())
+    .pipe(gulp.dest(dirs.dest));
 });
