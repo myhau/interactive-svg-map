@@ -1,0 +1,38 @@
+{
+  "name": "interactive-svg-map",
+  "version": "1.0.0",
+  "description": "Interactive SVG Map",
+  "main": "index.js",
+  "scripts": {
+    "gulp": "node node_modules/gulp/bin/gulp",
+    "build": "gulp build",
+    "serve": "gulp serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/askesian/interactive-svg-map.git"
+  },
+  "keywords": [
+    "map",
+    "svg",
+    "interactive map",
+    "animation"
+  ],
+  "author": "Chris Wigley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/askesian/interactive-svg-map/issues"
+  },
+  "homepage": "https://github.com/askesian/interactive-svg-map#readme",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-sequence": "^0.4.1",
+    "gulp-svgmin": "^1.2.0"
+  },
+  "private": true,
+  "dependencies": {}
+}
