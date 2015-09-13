@@ -1,4 +1,5 @@
 import autoprefixer from 'autoprefixer';
+import browserSync from 'browser-sync';
 import cssmin from 'cssnano';
 import del from 'del';
 import fs from 'fs';
@@ -25,21 +26,21 @@ const paths = {
     dest: `${dirs.dest}/public/js/`
   },
   vectors: {
-    src: `${dirs.src}/public/vectors/**/*.svg`,
+    src: `${dirs.src}/public/vectors/*.svg`,
     dest: `${dirs.dest}/public/vectors/`
   }
 };
 
 gulp.task('build', (done) => {
-  seq(['svg', 'sass', 'js'], 'insert:svg', 'copy:html', done);
+  seq('clean', ['svg', 'sass', 'js'], 'insert:map', 'copy', done);
 });
 
 gulp.task('serve', (done) => {
-  seq('clean', 'build', 'browserSync', done);
+  seq('build', 'browserSync', done);
 });
 
-gulp.task('clean', (done) => {
-  del(dirs.dest, done);
+gulp.task('clean', () => {
+  return del([dirs.dest]);
 });
 
 gulp.task('svg', () => {
@@ -70,7 +71,7 @@ gulp.task('js', () => {
     .pipe(gulp.dest(config.dest));
 });
 
-gulp.task('insert:svg', () => {
+gulp.task('insert:map', () => {
   let config = paths.vectors;
   let svgContent = fs.readFileSync(config.dest + '/map.svg', "utf8");
 
@@ -79,8 +80,15 @@ gulp.task('insert:svg', () => {
     .pipe(gulp.dest(dirs.src));
 });
 
+gulp.task('copy', ['copy:html', 'copy:favicon']);
+
 gulp.task('copy:html', () => {
   return gulp.src(dirs.src + '/index.html')
     .pipe(htmlmin())
+    .pipe(gulp.dest(dirs.dest));
+});
+
+gulp.task('copy:favicon', () => {
+  return gulp.src(dirs.src + '/public/favicon.ico')
     .pipe(gulp.dest(dirs.dest));
 });
