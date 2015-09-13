@@ -1,5 +1,8 @@
+import autoprefixer from 'autoprefixer';
+import cssmin from 'cssnano';
 import del from 'del';
 import gulp from 'gulp';
+import postcss from 'gulp-postcss';
 import sass from 'gulp-sass';
 import seq from 'gulp-sequence';
 import svgmin from 'gulp-svgmin';
@@ -44,9 +47,14 @@ gulp.task('svg', () => {
 
 gulp.task('sass', () => {
   let config = paths.sass;
+  let processors = [
+    autoprefixer({ browsers: ['last 2 versions'] }),
+    cssmin()
+  ];
 
   return gulp.src(config.src)
     .pipe(sass.sync().on('error', sass.logError))
+    .pipe(postcss(processors))
     .pipe(gulp.dest(config.dest));
 });
 

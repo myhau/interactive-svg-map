@@ -9,10 +9,26 @@ The goals of this project are:
 * Be able to interact indirectly with each individual country on the map via interactions with user interface elements that are not a part of the map
 
 ## Dependencies
-[TODO:]
+* Babel
+* Gulp
+* gulp-svgmin
+* gulp-sass
+* gulp-sequence
+
 ## How to build the map SVG
 [TODO:]
 ## How to build the project
-[TODO:]
+From the console:
+
+```bash
+> npm run build
+```
+
+Or, if you want to start a small server that refreshes when your source files are changed, you can run:
+
+```bash
+> npm run serve
+```
+
 ## Development
 [TODO:]
