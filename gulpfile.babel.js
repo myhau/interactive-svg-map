@@ -2,6 +2,7 @@ import autoprefixer from 'autoprefixer';
 import browserSync from 'browser-sync';
 import cssmin from 'cssnano';
 import del from 'del';
+import deploy from 'gulp-gh-pages';
 import fs from 'fs';
 import gulp from 'gulp';
 import htmlmin from 'gulp-minify-html';
@@ -33,6 +34,11 @@ const paths = {
 
 gulp.task('build', (done) => {
   seq('clean', ['svg', 'sass', 'js'], 'insert:map', 'copy', done);
+});
+
+gulp.task('deploy', ['build'], () => {
+  return gulp.src(dirs.dest + '/**/*')
+    .pipe(deploy());
 });
 
 gulp.task('serve', (done) => {
@@ -77,16 +83,11 @@ gulp.task('insert:map', () => {
 
   return gulp.src(dirs.src + '/index.html')
     .pipe(replace(/{{MAP_SVG}}/g, svgContent))
-    .pipe(gulp.dest(dirs.src));
-});
-
-gulp.task('copy', ['copy:html', 'copy:favicon']);
-
-gulp.task('copy:html', () => {
-  return gulp.src(dirs.src + '/index.html')
     .pipe(htmlmin())
     .pipe(gulp.dest(dirs.dest));
 });
+
+gulp.task('copy', ['copy:favicon']);
 
 gulp.task('copy:favicon', () => {
   return gulp.src(dirs.src + '/public/favicon.ico')
