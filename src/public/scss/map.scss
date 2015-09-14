@@ -1,12 +1,29 @@
-$countries: (
-    canada: rgb(255, 0, 0),
-    china: rgb(224, 38, 0),
-    france: rgb(240, 37, 50),
-    mexico: rgb(0, 105, 70),
-    russia: rgb(215, 41, 15),
-    uk: rgb(0, 32, 127),
-    usa: rgb(60, 57, 112)
+$base-colors: (
+  red: rgb(229, 57, 53),
+  blue: rgb(25, 118, 210),
+  green: rgb(56, 142, 60),
+  yellow: rgb(253, 216, 53),
+  purple: rgb(106, 27, 154),
+  orange: rgb(239, 108, 0),
+  pink: rgb(233, 30, 99),
+  white: rgb(255, 255, 255),
+  black: rgb(0, 0, 0),
+  lightgray: rgb(224, 224, 224),
+  medgray: rgb(158, 158, 158),
+  darkgray: rgb(66, 66, 66)
 );
+
+$countries: (
+  canada: rgb(255, 0, 0),
+  china: rgb(224, 38, 0),
+  france: rgb(240, 37, 50),
+  mexico: rgb(0, 105, 70),
+  russia: rgb(215, 41, 15),
+  uk: rgb(0, 32, 127),
+  usa: rgb(60, 57, 112)
+);
+
+$colors: map-merge($base-colors, $countries);
 
 *,
 *:before,
@@ -19,12 +36,14 @@ html {
 }
 
 body {
-  background: rgba(193, 230, 255, 0.3);
   position: relative;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
   font-size: 1rem;
   line-height: 1.518;
+  background: rgba(193, 230, 255, 0.3);
 }
 
 // required for IE
@@ -40,6 +59,7 @@ svg:not(root) {
 path {
   fill: rgba(235, 228, 196, 1);
   stroke: rgba(0,0,0,0.05);
+  transition: fill 0.3s ease-in;
 
   &:active,
   &:focus,
