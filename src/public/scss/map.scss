@@ -31,6 +31,11 @@ $colors: map-merge($base-colors, $countries);
   box-sizing: inherit;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 html {
   font-size: 16px;
 }
@@ -43,7 +48,7 @@ body {
   font-family: sans-serif;
   font-size: 1rem;
   line-height: 1.518;
-  background: rgba(193, 230, 255, 0.3);
+  // background: rgba(193, 230, 255, 0.3);
 }
 
 // required for IE
@@ -52,68 +57,41 @@ svg {
   width: 100%;
 }
 
-svg:not(root) {
-  width: 100%;
+svg {
+  shape-rendering: crispEdges;
 }
 
-path {
-  fill: rgba(235, 228, 196, 1);
-  stroke: rgba(0,0,0,0.05);
-  transition: fill 0.2s ease-in;
-
-  &:active,
-  &:focus,
-  &:hover {
-    fill: rgba(0,0,0,0.5);
-  }
+svg:not(root) {
+  width: 100%;
 }
 
 .map-container {
   display: inline-block;
   position: relative;
   width: 100%;
-  padding-bottom: 64.7%;
   vertical-align: middle;
   overflow: hidden;
 }
 
-[data-id="CA"]:hover {
-  fill: map-get($countries, canada);
-}
-
-[data-id="CN"]:hover {
-  fill: map-get($countries, china);
-}
-
-[data-id="FR"]:hover {
-  fill: map-get($countries, france);
-}
-
-[data-id="GB"]:hover {
-  fill: map-get($countries, uk);
-}
-
-[data-id="MX"]:hover {
-  fill: map-get($countries, mexico);
-}
-
-[data-id="RU"]:hover {
-  fill: map-get($countries, russia);
-}
-
-[data-id="US"]:hover {
-  fill: map-get($countries, usa);
-}
-
-.message {
+.map__buttons {
   position: absolute;
-  left: 0;
-  top: 10px;
-  padding: 0.5rem 1rem;
-  background: rgba(0,0,0,0.7);
-  font-size: 1.5em;
-  text-align: center;
-  text-transform: uppercase;
-  color: #e4e4e4;
-  z-index: 2;
+  right: 30px;
+  top: 30px;
+}
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
+#countries {
+  fill: #d4d4d4;
+  stroke: #fff;
+  stroke-width: .5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+#countries .active {
+  fill: #89a;
 }

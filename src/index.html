@@ -7,13 +7,16 @@
     <meta name="description" content="Interactive SVG Map">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="public/css/map.css">
+    <script src="public/js/d3.pack.js"></script>
     <script async src="public/js/map.js"></script>
   </head>
   <body>
-    <div class="message"></div>
     <div class="map-container">
-      <!-- insert external map svg here -->
-      {{MAP_SVG}}
+      <div class="map__buttons">
+        <button data-zoom="+1">Zoom In</button>
+        <button data-zoom="-1">Zoom Out</button>
+        <button data-reset>Reset</button>
+      </div>
     </div>
     <div class="overlay"></div>
   </body>
