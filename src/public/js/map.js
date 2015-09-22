@@ -51,7 +51,7 @@
     .call(zoom.event);
 
   // async load the topojson map data then build the map
-  d3.json('/public/data/countries-topo.json', function(error, world) {
+  d3.json('public/data/countries-topo.json', function(error, world) {
     if (error) {
       return console.error(error);
     }
