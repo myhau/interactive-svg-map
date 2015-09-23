@@ -8,7 +8,7 @@
   var active = d3.select(null);
 
   var color = d3.scale.ordinal()
-    .range(['#2196F3', '#E53935', '#43A047']);
+    .range(['#BBDEFB', '#FFCDD2', '#DCEDC8']);
 
   var projection = d3.geo.miller()
     .scale(160)
